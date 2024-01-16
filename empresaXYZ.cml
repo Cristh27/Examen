@@ -1,0 +1,68 @@
+ContextMap AlquilerVehiculosMap {
+    contains GestionAlquileres 
+    contains GestionClientes 
+    contains GestionVehiculos 
+    contains GestionPagos 
+    contains Seguridad 
+
+    GestionAlquileres [SK]<->[SK] GestionClientes
+    GestionAlquileres [U,S]->[D,C] GestionVehiculos
+    GestionAlquileres [SK]<->[SK] GestionPagos
+    GestionClientes [U,S]->[D,C] Seguridad
+}
+
+BoundedContext GestionAlquileres {
+    Module alquileres {
+        basePackage = com.ejemplo.gestion.alquileres
+
+        Aggregate GestionAlquileres {
+            Entity ContratoAlquiler
+            ValueObject DetallesAlquiler
+        }
+    }
+}
+
+BoundedContext GestionClientes {
+    Module clientes {
+        basePackage = com.ejemplo.gestion.clientes
+
+        Aggregate GestionClientes {
+            Entity Cliente
+            ValueObject DetallesCliente
+        }
+    }
+}
+
+BoundedContext GestionVehiculos {
+    Module vehiculos {
+        basePackage = com.ejemplo.gestion.vehiculos
+
+        Aggregate GestionVehiculos {
+            Entity Vehiculo
+            ValueObject DetallesVehiculo
+        }
+    }
+}
+
+BoundedContext GestionPagos {
+    Module pagos {
+        basePackage = com.ejemplo.gestion.pagos
+
+        Aggregate GestionPagos {
+            Entity Pago
+            ValueObject DetallesPago
+        }
+    }
+}
+
+BoundedContext Seguridad {
+    Module seguridad {
+        basePackage = com.ejemplo.seguridad
+
+        Aggregate Seguridad {
+            Entity Usuario
+            ValueObject Rol
+            // Otros componentes relacionados con la seguridad
+        }
+    }
+}
